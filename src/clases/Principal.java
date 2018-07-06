@@ -37,6 +37,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panelMenu = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -62,6 +63,66 @@ public class Principal extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         panelProcesoArchivos = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JSeparator();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        panelProcesoForm = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jButton14 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
+        jTextField11 = new javax.swing.JTextField();
+        jTextField12 = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        jTextField13 = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jTextField14 = new javax.swing.JTextField();
+        jTextField15 = new javax.swing.JTextField();
+        jTextField16 = new javax.swing.JTextField();
+        jTextField17 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jTextField18 = new javax.swing.JTextField();
+        jTextField19 = new javax.swing.JTextField();
+        jTextField20 = new javax.swing.JTextField();
+        jButton15 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(950, 600));
@@ -242,6 +303,11 @@ public class Principal extends javax.swing.JFrame {
 
         jButton6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jButton6.setText("Continuar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         panelRegistro.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 150, 50));
 
         panelMain.add(panelRegistro, "card6");
@@ -249,10 +315,246 @@ public class Principal extends javax.swing.JFrame {
         panelProcesoArchivos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel11.setText("Seleccionar Documentos");
-        panelProcesoArchivos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jLabel11.setText("Recibo de pago (copia)");
+        panelProcesoArchivos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel12.setText("Seleccionar Documentos");
+        panelProcesoArchivos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel13.setText("Documentos");
+        panelProcesoArchivos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel14.setText("Foto 2x2");
+        panelProcesoArchivos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel15.setText("Kardex academico");
+        panelProcesoArchivos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel16.setText("Record de notas");
+        panelProcesoArchivos.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel17.setText("Cédula (escaneada)");
+        panelProcesoArchivos.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
+
+        jButton7.setText("Siguiente");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 490, -1, -1));
+
+        jButton8.setText("Añadir archivo");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 169, -1, 30));
+
+        jButton9.setText("Añadir archivo");
+        panelProcesoArchivos.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 219, -1, 30));
+
+        jButton10.setText("Añadir archivo");
+        panelProcesoArchivos.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 269, -1, 30));
+
+        jButton11.setText("Añadir archivo");
+        panelProcesoArchivos.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 319, -1, 30));
+        panelProcesoArchivos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 530, -1));
+        panelProcesoArchivos.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 530, -1));
+        panelProcesoArchivos.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 530, -1));
+        panelProcesoArchivos.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 530, -1));
+        panelProcesoArchivos.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 530, -1));
+
+        jButton12.setText("Añadir archivo");
+        panelProcesoArchivos.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 369, -1, 30));
+
+        jButton13.setText("Atras");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 90, -1));
+        panelProcesoArchivos.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 520, -1));
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 140, -1));
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 140, -1));
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 140, -1));
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 140, -1));
+
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 140, -1));
 
         panelMain.add(panelProcesoArchivos, "card7");
+
+        panelProcesoForm.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel18.setText("Correo electronico");
+        panelProcesoForm.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel19.setText("FORMULARIO DE INSCRIPCION");
+        panelProcesoForm.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel20.setText("Nombres");
+        panelProcesoForm.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel21.setText("Apellidos");
+        panelProcesoForm.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
+
+        jLabel22.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel22.setText("Fecha");
+        panelProcesoForm.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel23.setText("Matrícula");
+        panelProcesoForm.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, -1, -1));
+
+        jLabel24.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel24.setText("Dirección");
+        panelProcesoForm.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+
+        jButton14.setText("Limpiar");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+        panelProcesoForm.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 490, -1, -1));
+
+        jButton20.setText("Atras");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
+        panelProcesoForm.add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 90, -1));
+
+        jLabel25.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel25.setText("Carrera");
+        panelProcesoForm.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 60, 20));
+
+        jLabel26.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel26.setText("Telefono");
+        panelProcesoForm.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel27.setText("Nacionalidad");
+        panelProcesoForm.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+
+        jLabel28.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel28.setText("Completo pasantia?");
+        panelProcesoForm.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, -1, -1));
+
+        jLabel29.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel29.setText("Sede o resinto que estudió");
+        panelProcesoForm.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, 20));
+
+        jLabel30.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel30.setText("Cédula");
+        panelProcesoForm.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+
+        jTextField6.setText("dia");
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        panelProcesoForm.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 76, 40, -1));
+
+        jTextField7.setText("mes");
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        panelProcesoForm.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 76, 40, -1));
+
+        jTextField8.setText("año");
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
+        panelProcesoForm.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 76, 40, -1));
+        panelProcesoForm.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 146, -1));
+        panelProcesoForm.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 223, 250, -1));
+        panelProcesoForm.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 210, -1));
+        panelProcesoForm.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 220, -1));
+
+        jLabel31.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel31.setText("sector");
+        panelProcesoForm.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
+        panelProcesoForm.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 223, 166, -1));
+
+        jLabel32.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel32.setText("Provincia");
+        panelProcesoForm.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, -1, -1));
+        panelProcesoForm.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 223, 165, -1));
+        panelProcesoForm.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 300, 200, -1));
+        panelProcesoForm.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 140, -1));
+        panelProcesoForm.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 374, 200, -1));
+
+        jRadioButton1.setText("SI");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        panelProcesoForm.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 377, -1, -1));
+
+        jRadioButton2.setText("NO");
+        panelProcesoForm.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 377, -1, -1));
+        panelProcesoForm.add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 300, 140, -1));
+        panelProcesoForm.add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 200, -1));
+        panelProcesoForm.add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 135, -1));
+
+        jButton15.setText("Siguiente");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        panelProcesoForm.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 490, -1, -1));
+
+        panelMain.add(panelProcesoForm, "card7");
 
         getContentPane().add(panelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 780, 650));
 
@@ -327,6 +629,107 @@ public class Principal extends javax.swing.JFrame {
         panelMain.revalidate();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        //remove all panel
+        panelMain.removeAll();
+        panelMain.repaint();
+        panelMain.revalidate();
+        
+        //ADD PANEL
+        panelMain.add(panelProcesoArchivos);
+        panelMain.repaint();
+        panelMain.revalidate();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        //remove all panel
+        panelMain.removeAll();
+        panelMain.repaint();
+        panelMain.revalidate();
+        
+        //ADD PANEL
+        panelMain.add(panelProcesoForm);
+        panelMain.repaint();
+        panelMain.revalidate();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        //remove all panel
+        panelMain.removeAll();
+        panelMain.repaint();
+        panelMain.revalidate();
+        
+        //ADD PANEL
+        panelMain.add(panelRegistro);
+        panelMain.repaint();
+        panelMain.revalidate();
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        // TODO add your handling code here:
+        //remove all panel
+        panelMain.removeAll();
+        panelMain.repaint();
+        panelMain.revalidate();
+        
+        //ADD PANEL
+        panelMain.add(panelProcesoArchivos);
+        panelMain.repaint();
+        panelMain.revalidate();
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -363,23 +766,83 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField jTextField17;
+    private javax.swing.JTextField jTextField18;
+    private javax.swing.JTextField jTextField19;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField20;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel panelAyuda;
     private javax.swing.JPanel panelConsulta;
     private javax.swing.JPanel panelInicio;
@@ -387,6 +850,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelProcesoArchivos;
+    private javax.swing.JPanel panelProcesoForm;
     private javax.swing.JPanel panelRegistro;
     // End of variables declaration//GEN-END:variables
 }
