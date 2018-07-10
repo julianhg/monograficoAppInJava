@@ -48,18 +48,19 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton4" min="-2" pref="149" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="149" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="149" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="149" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jButton2" max="32767" attributes="0"/>
+                      <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jButton1" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButton4" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -68,7 +69,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="61" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" pref="49" max="-2" attributes="0"/>
@@ -76,7 +77,7 @@
                   <Component id="jButton1" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jButton4" min="-2" pref="49" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+                  <EmptySpace pref="201" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -84,7 +85,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CONSULTA"/>
+            <Property name="text" type="java.lang.String" value="LISTA DE ESTUDIANTES"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -236,19 +237,41 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="418" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="comboBoxListaCarr" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="326" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="522" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="comboBoxListaCarr" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="372" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -259,9 +282,91 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Lucida Grande" size="24" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="CONSULTA"/>
+                <Property name="text" type="java.lang.String" value="LISTADO DE ESTUDIANTES"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Lucida Sans" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="SELECCIONE CARRERA"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="comboBoxListaCarr">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="52">
+                    <StringItem index="0" value="Administraci&#xf3;n"/>
+                    <StringItem index="1" value="Agrimensura"/>
+                    <StringItem index="2" value="Agronom&#xed;a"/>
+                    <StringItem index="3" value="Arquitectura"/>
+                    <StringItem index="4" value="Artes Pl&#xe1;sticas"/>
+                    <StringItem index="5" value="Bibliotecolog&#xed;a"/>
+                    <StringItem index="6" value="Bioan&#xe1;lisis"/>
+                    <StringItem index="7" value="Biolog&#xed;a"/>
+                    <StringItem index="8" value="Ciencias Fisil&#xf3;gicas"/>
+                    <StringItem index="9" value="Ciencias Geogr&#xe1;ficas"/>
+                    <StringItem index="10" value="Ciencias Morfol&#xf3;gicas"/>
+                    <StringItem index="11" value="Cine TV-Fotograf&#xed;a"/>
+                    <StringItem index="12" value="Comunicaci&#xf3;n Social"/>
+                    <StringItem index="13" value="Contabilidad"/>
+                    <StringItem index="14" value="Cr&#xed;tica e Historia del Arte"/>
+                    <StringItem index="15" value="Dise&#xf1;o Industrial y Moda"/>
+                    <StringItem index="16" value="Econom&#xed;a"/>
+                    <StringItem index="17" value="Educaci&#xf3;n Infantil y B&#xe1;sicas"/>
+                    <StringItem index="18" value="Educaci&#xf3;n Media"/>
+                    <StringItem index="19" value="Enfermer&#xed;a"/>
+                    <StringItem index="20" value="Escuela de Idiomas"/>
+                    <StringItem index="21" value="Estad&#xed;stica"/>
+                    <StringItem index="22" value="Farmacia"/>
+                    <StringItem index="23" value="Filosof&#xed;a"/>
+                    <StringItem index="24" value="F&#xed;sica"/>
+                    <StringItem index="25" value="F&#xed;sica Y Deporte"/>
+                    <StringItem index="26" value="Historia y Antropolog&#xed;a"/>
+                    <StringItem index="27" value="Idioma"/>
+                    <StringItem index="28" value="Inform&#xe1;tica"/>
+                    <StringItem index="29" value="Ingenier&#xed;a Civil"/>
+                    <StringItem index="30" value="Ingenier&#xed;a Electromec&#xe1;nica"/>
+                    <StringItem index="31" value="Ingenier&#xed;a Industrial"/>
+                    <StringItem index="32" value="Ingenier&#xed;a Qu&#xed;mica"/>
+                    <StringItem index="33" value="Letras"/>
+                    <StringItem index="34" value="Matem&#xe1;tica"/>
+                    <StringItem index="35" value="Medicina"/>
+                    <StringItem index="36" value="Mercadotecnia"/>
+                    <StringItem index="37" value="Micro biolog&#xed;a y Parasitolog&#xed;a"/>
+                    <StringItem index="38" value="M&#xfa;sica"/>
+                    <StringItem index="39" value="Odontolog&#xed;a"/>
+                    <StringItem index="40" value="Orientaci&#xf3;n Profesional"/>
+                    <StringItem index="41" value="Orientaci&#xf3;n y Pedagog&#xed;a"/>
+                    <StringItem index="42" value="Pedagog&#xed;a"/>
+                    <StringItem index="43" value="Psicolog&#xed;a"/>
+                    <StringItem index="44" value="Publicidad"/>
+                    <StringItem index="45" value="Qu&#xed;mica"/>
+                    <StringItem index="46" value="Salud P&#xfa;blica"/>
+                    <StringItem index="47" value="Sociolog&#xed;a"/>
+                    <StringItem index="48" value="Teatro"/>
+                    <StringItem index="49" value="Teor&#xed;a y Gesti&#xf3;n Educativa"/>
+                    <StringItem index="50" value="Veterinaria"/>
+                    <StringItem index="51" value="Zootecnia"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxListaCarrActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton8">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="VER LISTADO"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -335,7 +440,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Futura" size="24" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Registro"/>
+                <Property name="text" type="java.lang.String" value="NOTA"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -368,14 +473,14 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Lucida Grande" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Continuar"/>
+                <Property name="text" type="java.lang.String" value="Empezar registro"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="400" y="440" width="150" height="50"/>
+                  <AbsoluteConstraints x="160" y="380" width="200" height="50"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -496,12 +601,12 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton8">
+            <Component class="javax.swing.JButton" name="btnAgregarFoto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir archivo"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarFotoActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -509,30 +614,39 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton9">
+            <Component class="javax.swing.JButton" name="btnAgregarKardex">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir archivo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarKardexActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="470" y="219" width="-1" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton10">
+            <Component class="javax.swing.JButton" name="btnAgregarNotas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir archivo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarNotasActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="470" y="269" width="-1" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton11">
+            <Component class="javax.swing.JButton" name="btnAgregarCedula">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir archivo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarCedulaActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="470" y="319" width="-1" height="30"/>
@@ -574,10 +688,13 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton12">
+            <Component class="javax.swing.JButton" name="btnAgregarRecibo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir archivo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarReciboActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="470" y="369" width="-1" height="30"/>
@@ -604,9 +721,9 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="textFieldKardex">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldKardexActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -614,9 +731,9 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JTextField" name="textFieldFoto">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldFotoActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -624,9 +741,9 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
+            <Component class="javax.swing.JTextField" name="textFieldRecibo">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldReciboActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -634,9 +751,9 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField4">
+            <Component class="javax.swing.JTextField" name="textFieldNotas">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldNotasActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -644,9 +761,9 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField5">
+            <Component class="javax.swing.JTextField" name="textFieldCedula">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldCedulaActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -716,19 +833,6 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="280" y="120" width="-1" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel22">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Grande" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Fecha"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="30" y="60" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -862,67 +966,28 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField6">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="dia"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField6ActionPerformed"/>
-              </Events>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="30" y="76" width="40" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField7">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="mes"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField7ActionPerformed"/>
-              </Events>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="76" y="76" width="40" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField8">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="a&#xf1;o"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField8ActionPerformed"/>
-              </Events>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="122" y="76" width="40" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField9">
+            <Component class="javax.swing.JTextField" name="tFieldMatricula">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="510" y="140" width="146" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField10">
+            <Component class="javax.swing.JTextField" name="tFieldDireccion">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="30" y="223" width="250" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField11">
+            <Component class="javax.swing.JTextField" name="tFieldApellido">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="270" y="140" width="210" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField12">
+            <Component class="javax.swing.JTextField" name="tFieldnombre">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="30" y="140" width="220" height="-1"/>
@@ -942,7 +1007,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField13">
+            <Component class="javax.swing.JTextField" name="tFieldSector">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="304" y="223" width="166" height="-1"/>
@@ -962,40 +1027,26 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField14">
+            <Component class="javax.swing.JTextField" name="tFieldProvincia">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="488" y="223" width="165" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField15">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="384" y="300" width="200" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField16">
+            <Component class="javax.swing.JTextField" name="tFieldCedula">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="30" y="300" width="140" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField17">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="30" y="374" width="200" height="-1"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+            <Component class="javax.swing.JRadioButton" name="radioBtnPasantiaSI">
               <Properties>
                 <Property name="text" type="java.lang.String" value="SI"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioBtnPasantiaSIActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1003,47 +1054,183 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+            <Component class="javax.swing.JRadioButton" name="radioBtnPasantiaNO">
               <Properties>
                 <Property name="text" type="java.lang.String" value="NO"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioBtnPasantiaNOActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="342" y="377" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField18">
+            <Component class="javax.swing.JTextField" name="tFieldNacionalidad">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="205" y="300" width="140" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField19">
+            <Component class="javax.swing.JTextField" name="tFieldCorreo">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="230" y="440" width="200" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField20">
+            <Component class="javax.swing.JTextField" name="tFieldTelefono">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="30" y="440" width="135" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton15">
+            <Component class="javax.swing.JButton" name="btnSiguienteForm">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Siguiente"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSiguienteFormActionPerformed"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="610" y="490" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="comboBoxCarrera">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="52">
+                    <StringItem index="0" value="Administraci&#xf3;n"/>
+                    <StringItem index="1" value="Agrimensura"/>
+                    <StringItem index="2" value="Agronom&#xed;a"/>
+                    <StringItem index="3" value="Arquitectura"/>
+                    <StringItem index="4" value="Artes Pl&#xe1;sticas"/>
+                    <StringItem index="5" value="Bibliotecolog&#xed;a"/>
+                    <StringItem index="6" value="Bioan&#xe1;lisis"/>
+                    <StringItem index="7" value="Biolog&#xed;a"/>
+                    <StringItem index="8" value="Ciencias Fisil&#xf3;gicas"/>
+                    <StringItem index="9" value="Ciencias Geogr&#xe1;ficas"/>
+                    <StringItem index="10" value="Ciencias Morfol&#xf3;gicas"/>
+                    <StringItem index="11" value="Cine TV-Fotograf&#xed;a"/>
+                    <StringItem index="12" value="Comunicaci&#xf3;n Social"/>
+                    <StringItem index="13" value="Contabilidad"/>
+                    <StringItem index="14" value="Cr&#xed;tica e Historia del Arte"/>
+                    <StringItem index="15" value="Dise&#xf1;o Industrial y Moda"/>
+                    <StringItem index="16" value="Econom&#xed;a"/>
+                    <StringItem index="17" value="Educaci&#xf3;n Infantil y B&#xe1;sicas"/>
+                    <StringItem index="18" value="Educaci&#xf3;n Media"/>
+                    <StringItem index="19" value="Enfermer&#xed;a"/>
+                    <StringItem index="20" value="Escuela de Idiomas"/>
+                    <StringItem index="21" value="Estad&#xed;stica"/>
+                    <StringItem index="22" value="Farmacia"/>
+                    <StringItem index="23" value="Filosof&#xed;a"/>
+                    <StringItem index="24" value="F&#xed;sica"/>
+                    <StringItem index="25" value="F&#xed;sica Y Deporte"/>
+                    <StringItem index="26" value="Historia y Antropolog&#xed;a"/>
+                    <StringItem index="27" value="Idioma"/>
+                    <StringItem index="28" value="Inform&#xe1;tica"/>
+                    <StringItem index="29" value="Ingenier&#xed;a Civil"/>
+                    <StringItem index="30" value="Ingenier&#xed;a Electromec&#xe1;nica"/>
+                    <StringItem index="31" value="Ingenier&#xed;a Industrial"/>
+                    <StringItem index="32" value="Ingenier&#xed;a Qu&#xed;mica"/>
+                    <StringItem index="33" value="Letras"/>
+                    <StringItem index="34" value="Matem&#xe1;tica"/>
+                    <StringItem index="35" value="Medicina"/>
+                    <StringItem index="36" value="Mercadotecnia"/>
+                    <StringItem index="37" value="Micro biolog&#xed;a y Parasitolog&#xed;a"/>
+                    <StringItem index="38" value="M&#xfa;sica"/>
+                    <StringItem index="39" value="Odontolog&#xed;a"/>
+                    <StringItem index="40" value="Orientaci&#xf3;n Profesional"/>
+                    <StringItem index="41" value="Orientaci&#xf3;n y Pedagog&#xed;a"/>
+                    <StringItem index="42" value="Pedagog&#xed;a"/>
+                    <StringItem index="43" value="Psicolog&#xed;a"/>
+                    <StringItem index="44" value="Publicidad"/>
+                    <StringItem index="45" value="Qu&#xed;mica"/>
+                    <StringItem index="46" value="Salud P&#xfa;blica"/>
+                    <StringItem index="47" value="Sociolog&#xed;a"/>
+                    <StringItem index="48" value="Teatro"/>
+                    <StringItem index="49" value="Teor&#xed;a y Gesti&#xf3;n Educativa"/>
+                    <StringItem index="50" value="Veterinaria"/>
+                    <StringItem index="51" value="Zootecnia"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxCarreraActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="380" y="300" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="comboBoxSede">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="20">
+                    <StringItem index="0" value="Ban&#xed;"/>
+                    <StringItem index="1" value="Barahona"/>
+                    <StringItem index="2" value="Bonao"/>
+                    <StringItem index="3" value="Duverg&#xe9;"/>
+                    <StringItem index="4" value="Hato Mayor"/>
+                    <StringItem index="5" value="Higuey"/>
+                    <StringItem index="6" value="La Romana"/>
+                    <StringItem index="7" value="La Vega"/>
+                    <StringItem index="8" value="Nagua"/>
+                    <StringItem index="9" value="Neiba"/>
+                    <StringItem index="10" value="Puerto Plata"/>
+                    <StringItem index="11" value="Saman&#xe1;"/>
+                    <StringItem index="12" value="San Crist&#xf3;bal"/>
+                    <StringItem index="13" value="San Francisco de Macor&#xed;s"/>
+                    <StringItem index="14" value="San Juan de la Maguana"/>
+                    <StringItem index="15" value="San Pedro de Macor&#xed;s"/>
+                    <StringItem index="16" value="Santiago"/>
+                    <StringItem index="17" value="Santiago Rodr&#xed;guez"/>
+                    <StringItem index="18" value="Santo Domingo"/>
+                    <StringItem index="19" value="Valverde-Mao"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="20" y="370" width="150" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="panelConfirmacion">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="card9"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="false"/>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="btnConfirmarReg">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Confirmar registro"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarRegActionPerformed"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="510" y="450" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>

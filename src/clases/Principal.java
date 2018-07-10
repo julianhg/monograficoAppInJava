@@ -5,6 +5,18 @@
  */
 package clases;
 
+import java.awt.TextField;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javafx.beans.value.ObservableValue;
+import javax.swing.ButtonGroup;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author elianahgx
@@ -13,20 +25,129 @@ public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
+     * 
      */
+    
+    Estudiante estudiante = null;
+    ArchivosDoc documentos = null;
+    ButtonGroup grupoRadio1;
+    
+    
     public Principal() {
         initComponents();
+        grupoRadio1 = new ButtonGroup();
+        
+        grupoRadio1.add(radioBtnPasantiaSI);
+        grupoRadio1.add(radioBtnPasantiaNO);
+        
         this.setLocationRelativeTo(null);
         //this.setExtendedState(MAXIMIZED_BOTH);
         
-         //remove all panel
-//        jPanelPadre.removeAll();
-//        jPanelPadre.repaint();
-//        jPanelPadre.revalidate();
+        //configuracion inicial para componentes
+        textFieldFoto.setEnabled(false);
+        textFieldKardex.setEnabled(false);
+        textFieldNotas.setEnabled(false);
+        textFieldCedula.setEnabled(false);
+        textFieldRecibo.setEnabled(false);
+        
+        //instancia estudiante para el formulario
+        estudiante = new Estudiante();
+        documentos = new ArchivosDoc();
 //       
         
       
     }
+    //CONCATENAR DIRECCION, SECTOR Y PROVINCIA
+    public String concatDireccion(){
+        return ""+tFieldDireccion.getText()+", "+tFieldSector.getText()+", "+tFieldProvincia.getText()+"";
+    }
+    
+    
+    //PARA SELECCIONAR ARCHIVOS DEL COMPUTADOR
+
+    String ruta_nombreArchivo = "";
+    File[] ruta_archivo = new File[5];
+    String ruta = "";
+    
+    public void seleccionarArchivo(JTextField tf, int i) {
+
+        JFileChooser j = new JFileChooser();
+        FileNameExtensionFilter fichero = new FileNameExtensionFilter("PDF o Imagen", "pdf", "jpge", "jpg", "png");
+        j.setFileFilter(fichero);
+        int se = j.showOpenDialog(this);
+        if (se == 0) {
+            //ruta_archivo[i] = null;
+            //this.btnAgregarFoto.setText("" + j.getSelectedFile().getName());
+            ruta = j.getSelectedFile().getAbsolutePath();
+            ruta_archivo[i] = new File(ruta);
+            ruta = "";
+            ruta_nombreArchivo = j.getSelectedFile().getName();
+
+        } else {
+        }
+        
+        tf.setText(ruta_nombreArchivo);
+    }
+    
+    //GUARDAR PDF EN CLASES ARCHIVOSDOC
+    
+    public void guardar_documentos(File[] ruta) {
+        DAOmono DAOm = new DAOmono();
+        
+        try {
+            byte[] fotoDoc = new byte[(int) ruta[0].length()];
+            InputStream input0 = new FileInputStream(ruta[0]);
+            input0.read(fotoDoc);
+            documentos.setFoto(fotoDoc);
+        } catch (IOException ex) {
+            documentos.setFoto(null);
+            //System.out.println("Error al agregar archivo pdf "+ex.getMessage());
+        }
+        
+        
+        try {
+            byte[] kardexDoc = new byte[(int) ruta[1].length()];
+            InputStream input1 = new FileInputStream(ruta[1]);
+            input1.read(kardexDoc);
+            documentos.setKardex(kardexDoc);
+        } catch (IOException ex) {
+            documentos.setKardex(null);
+            //System.out.println("Error al agregar archivo pdf "+ex.getMessage());
+        }
+        
+        try {
+            byte[] notasDoc = new byte[(int) ruta[2].length()];
+            InputStream input2 = new FileInputStream(ruta[2]);
+            input2.read(notasDoc);
+            documentos.setRecNotas(notasDoc);
+        } catch (IOException ex) {
+            documentos.setRecNotas(null);
+            //System.out.println("Error al agregar archivo pdf "+ex.getMessage());
+        }
+        
+        try {
+            byte[] cedulaDoc = new byte[(int) ruta[3].length()];
+            InputStream input3 = new FileInputStream(ruta[3]);
+            input3.read(cedulaDoc);
+            documentos.setCedula(cedulaDoc);
+        } catch (IOException ex) {
+            documentos.setCedula(null);
+            //System.out.println("Error al agregar archivo pdf "+ex.getMessage());
+        }
+        
+        try {
+            byte[] reciboDoc = new byte[(int) ruta[4].length()];
+            InputStream input4 = new FileInputStream(ruta[4]);
+            input4.read(reciboDoc);
+            documentos.setRecibo(reciboDoc);
+        } catch (IOException ex) {
+            documentos.setRecibo(null);
+            //System.out.println("Error al agregar archivo pdf "+ex.getMessage());
+        }
+        
+        DAOm.agregarDoc(documentos);
+    }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +174,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         panelConsulta = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        comboBoxListaCarr = new javax.swing.JComboBox<>();
+        jButton8 = new javax.swing.JButton();
         panelAyuda = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         panelRegistro = new javax.swing.JPanel();
@@ -70,29 +194,28 @@ public class Principal extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        btnAgregarFoto = new javax.swing.JButton();
+        btnAgregarKardex = new javax.swing.JButton();
+        btnAgregarNotas = new javax.swing.JButton();
+        btnAgregarCedula = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
-        jButton12 = new javax.swing.JButton();
+        btnAgregarRecibo = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        textFieldKardex = new javax.swing.JTextField();
+        textFieldFoto = new javax.swing.JTextField();
+        textFieldRecibo = new javax.swing.JTextField();
+        textFieldNotas = new javax.swing.JTextField();
+        textFieldCedula = new javax.swing.JTextField();
         panelProcesoForm = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
@@ -103,26 +226,25 @@ public class Principal extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        tFieldMatricula = new javax.swing.JTextField();
+        tFieldDireccion = new javax.swing.JTextField();
+        tFieldApellido = new javax.swing.JTextField();
+        tFieldnombre = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        tFieldSector = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField19 = new javax.swing.JTextField();
-        jTextField20 = new javax.swing.JTextField();
-        jButton15 = new javax.swing.JButton();
+        tFieldProvincia = new javax.swing.JTextField();
+        tFieldCedula = new javax.swing.JTextField();
+        radioBtnPasantiaSI = new javax.swing.JRadioButton();
+        radioBtnPasantiaNO = new javax.swing.JRadioButton();
+        tFieldNacionalidad = new javax.swing.JTextField();
+        tFieldCorreo = new javax.swing.JTextField();
+        tFieldTelefono = new javax.swing.JTextField();
+        btnSiguienteForm = new javax.swing.JButton();
+        comboBoxCarrera = new javax.swing.JComboBox<>();
+        comboBoxSede = new javax.swing.JComboBox<>();
+        panelConfirmacion = new javax.swing.JPanel();
+        btnConfirmarReg = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(950, 600));
@@ -130,7 +252,7 @@ public class Principal extends javax.swing.JFrame {
 
         panelMenu.setBackground(new java.awt.Color(99, 205, 218));
 
-        jButton1.setText("CONSULTA");
+        jButton1.setText("LISTA DE ESTUDIANTES");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -165,23 +287,24 @@ public class Principal extends javax.swing.JFrame {
         panelMenuLayout.setHorizontalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel5)))
-                .addGap(34, 34, 34))
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(45, 45, 45))
+            .addGroup(panelMenuLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,7 +312,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(179, 179, 179))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 650));
@@ -241,24 +364,57 @@ public class Principal extends javax.swing.JFrame {
         panelMain.add(panelInscripcion, "card3");
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel3.setText("CONSULTA");
+        jLabel3.setText("LISTADO DE ESTUDIANTES");
         jLabel3.setToolTipText("");
+
+        jLabel6.setFont(new java.awt.Font("Lucida Sans", 0, 14)); // NOI18N
+        jLabel6.setText("SELECCIONE CARRERA");
+
+        comboBoxListaCarr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administración", "Agrimensura", "Agronomía", "Arquitectura", "Artes Plásticas", "Bibliotecología", "Bioanálisis", "Biología", "Ciencias Fisilógicas", "Ciencias Geográficas", "Ciencias Morfológicas", "Cine TV-Fotografía", "Comunicación Social", "Contabilidad", "Crítica e Historia del Arte", "Diseño Industrial y Moda", "Economía", "Educación Infantil y Básicas", "Educación Media", "Enfermería", "Escuela de Idiomas", "Estadística", "Farmacia", "Filosofía", "Física", "Física Y Deporte", "Historia y Antropología", "Idioma", "Informática", "Ingeniería Civil", "Ingeniería Electromecánica", "Ingeniería Industrial", "Ingeniería Química", "Letras", "Matemática", "Medicina", "Mercadotecnia", "Micro biología y Parasitología", "Música", "Odontología", "Orientación Profesional", "Orientación y Pedagogía", "Pedagogía", "Psicología", "Publicidad", "Química", "Salud Pública", "Sociología", "Teatro", "Teoría y Gestión Educativa", "Veterinaria", "Zootecnia" }));
+        comboBoxListaCarr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxListaCarrActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("VER LISTADO");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelConsultaLayout = new javax.swing.GroupLayout(panelConsulta);
         panelConsulta.setLayout(panelConsultaLayout);
         panelConsultaLayout.setHorizontalGroup(
             panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultaLayout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addComponent(jLabel3)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelConsultaLayout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jLabel3))
+                    .addGroup(panelConsultaLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelConsultaLayout.createSequentialGroup()
+                                .addComponent(comboBoxListaCarr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton8))
+                            .addComponent(jLabel6))))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         panelConsultaLayout.setVerticalGroup(
             panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultaLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addGap(101, 101, 101)
                 .addComponent(jLabel3)
-                .addContainerGap(522, Short.MAX_VALUE))
+                .addGap(89, 89, 89)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxListaCarr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
 
         panelMain.add(panelConsulta, "card4");
@@ -293,7 +449,7 @@ public class Principal extends javax.swing.JFrame {
         panelRegistro.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
-        jLabel9.setText("Registro");
+        jLabel9.setText("NOTA");
         panelRegistro.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
         panelRegistro.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 400, -1));
 
@@ -302,13 +458,13 @@ public class Principal extends javax.swing.JFrame {
         panelRegistro.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
         jButton6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jButton6.setText("Continuar");
+        jButton6.setText("Empezar registro");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        panelRegistro.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 150, 50));
+        panelRegistro.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 200, 50));
 
         panelMain.add(panelRegistro, "card6");
 
@@ -350,30 +506,50 @@ public class Principal extends javax.swing.JFrame {
         });
         panelProcesoArchivos.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 490, -1, -1));
 
-        jButton8.setText("Añadir archivo");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarFoto.setText("Añadir archivo");
+        btnAgregarFoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnAgregarFotoActionPerformed(evt);
             }
         });
-        panelProcesoArchivos.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 169, -1, 30));
+        panelProcesoArchivos.add(btnAgregarFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 169, -1, 30));
 
-        jButton9.setText("Añadir archivo");
-        panelProcesoArchivos.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 219, -1, 30));
+        btnAgregarKardex.setText("Añadir archivo");
+        btnAgregarKardex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarKardexActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(btnAgregarKardex, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 219, -1, 30));
 
-        jButton10.setText("Añadir archivo");
-        panelProcesoArchivos.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 269, -1, 30));
+        btnAgregarNotas.setText("Añadir archivo");
+        btnAgregarNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarNotasActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(btnAgregarNotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 269, -1, 30));
 
-        jButton11.setText("Añadir archivo");
-        panelProcesoArchivos.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 319, -1, 30));
+        btnAgregarCedula.setText("Añadir archivo");
+        btnAgregarCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCedulaActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(btnAgregarCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 319, -1, 30));
         panelProcesoArchivos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 530, -1));
         panelProcesoArchivos.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 530, -1));
         panelProcesoArchivos.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 530, -1));
         panelProcesoArchivos.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 530, -1));
         panelProcesoArchivos.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 530, -1));
 
-        jButton12.setText("Añadir archivo");
-        panelProcesoArchivos.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 369, -1, 30));
+        btnAgregarRecibo.setText("Añadir archivo");
+        btnAgregarRecibo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarReciboActionPerformed(evt);
+            }
+        });
+        panelProcesoArchivos.add(btnAgregarRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 369, -1, 30));
 
         jButton13.setText("Atras");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -384,40 +560,40 @@ public class Principal extends javax.swing.JFrame {
         panelProcesoArchivos.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 90, -1));
         panelProcesoArchivos.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 520, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        textFieldKardex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textFieldKardexActionPerformed(evt);
             }
         });
-        panelProcesoArchivos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 140, -1));
+        panelProcesoArchivos.add(textFieldKardex, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 140, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        textFieldFoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                textFieldFotoActionPerformed(evt);
             }
         });
-        panelProcesoArchivos.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 140, -1));
+        panelProcesoArchivos.add(textFieldFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 140, -1));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        textFieldRecibo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                textFieldReciboActionPerformed(evt);
             }
         });
-        panelProcesoArchivos.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 140, -1));
+        panelProcesoArchivos.add(textFieldRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 140, -1));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        textFieldNotas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                textFieldNotasActionPerformed(evt);
             }
         });
-        panelProcesoArchivos.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 140, -1));
+        panelProcesoArchivos.add(textFieldNotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 140, -1));
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        textFieldCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                textFieldCedulaActionPerformed(evt);
             }
         });
-        panelProcesoArchivos.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 140, -1));
+        panelProcesoArchivos.add(textFieldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 140, -1));
 
         panelMain.add(panelProcesoArchivos, "card7");
 
@@ -438,10 +614,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel21.setText("Apellidos");
         panelProcesoForm.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
-
-        jLabel22.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jLabel22.setText("Fecha");
-        panelProcesoForm.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel23.setText("Matrícula");
@@ -490,71 +662,73 @@ public class Principal extends javax.swing.JFrame {
         jLabel30.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel30.setText("Cédula");
         panelProcesoForm.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
-
-        jTextField6.setText("dia");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-        panelProcesoForm.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 76, 40, -1));
-
-        jTextField7.setText("mes");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-        panelProcesoForm.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 76, 40, -1));
-
-        jTextField8.setText("año");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
-            }
-        });
-        panelProcesoForm.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 76, 40, -1));
-        panelProcesoForm.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 146, -1));
-        panelProcesoForm.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 223, 250, -1));
-        panelProcesoForm.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 210, -1));
-        panelProcesoForm.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 220, -1));
+        panelProcesoForm.add(tFieldMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 146, -1));
+        panelProcesoForm.add(tFieldDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 223, 250, -1));
+        panelProcesoForm.add(tFieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 210, -1));
+        panelProcesoForm.add(tFieldnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 220, -1));
 
         jLabel31.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel31.setText("sector");
         panelProcesoForm.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
-        panelProcesoForm.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 223, 166, -1));
+        panelProcesoForm.add(tFieldSector, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 223, 166, -1));
 
         jLabel32.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel32.setText("Provincia");
         panelProcesoForm.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, -1, -1));
-        panelProcesoForm.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 223, 165, -1));
-        panelProcesoForm.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 300, 200, -1));
-        panelProcesoForm.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 140, -1));
-        panelProcesoForm.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 374, 200, -1));
+        panelProcesoForm.add(tFieldProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 223, 165, -1));
+        panelProcesoForm.add(tFieldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 140, -1));
 
-        jRadioButton1.setText("SI");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        radioBtnPasantiaSI.setText("SI");
+        radioBtnPasantiaSI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                radioBtnPasantiaSIActionPerformed(evt);
             }
         });
-        panelProcesoForm.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 377, -1, -1));
+        panelProcesoForm.add(radioBtnPasantiaSI, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 377, -1, -1));
 
-        jRadioButton2.setText("NO");
-        panelProcesoForm.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 377, -1, -1));
-        panelProcesoForm.add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 300, 140, -1));
-        panelProcesoForm.add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 200, -1));
-        panelProcesoForm.add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 135, -1));
-
-        jButton15.setText("Siguiente");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        radioBtnPasantiaNO.setText("NO");
+        radioBtnPasantiaNO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                radioBtnPasantiaNOActionPerformed(evt);
             }
         });
-        panelProcesoForm.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 490, -1, -1));
+        panelProcesoForm.add(radioBtnPasantiaNO, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 377, -1, -1));
+        panelProcesoForm.add(tFieldNacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 300, 140, -1));
+        panelProcesoForm.add(tFieldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 200, -1));
+        panelProcesoForm.add(tFieldTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 135, -1));
+
+        btnSiguienteForm.setText("Siguiente");
+        btnSiguienteForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteFormActionPerformed(evt);
+            }
+        });
+        panelProcesoForm.add(btnSiguienteForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 490, -1, -1));
+
+        comboBoxCarrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administración", "Agrimensura", "Agronomía", "Arquitectura", "Artes Plásticas", "Bibliotecología", "Bioanálisis", "Biología", "Ciencias Fisilógicas", "Ciencias Geográficas", "Ciencias Morfológicas", "Cine TV-Fotografía", "Comunicación Social", "Contabilidad", "Crítica e Historia del Arte", "Diseño Industrial y Moda", "Economía", "Educación Infantil y Básicas", "Educación Media", "Enfermería", "Escuela de Idiomas", "Estadística", "Farmacia", "Filosofía", "Física", "Física Y Deporte", "Historia y Antropología", "Idioma", "Informática", "Ingeniería Civil", "Ingeniería Electromecánica", "Ingeniería Industrial", "Ingeniería Química", "Letras", "Matemática", "Medicina", "Mercadotecnia", "Micro biología y Parasitología", "Música", "Odontología", "Orientación Profesional", "Orientación y Pedagogía", "Pedagogía", "Psicología", "Publicidad", "Química", "Salud Pública", "Sociología", "Teatro", "Teoría y Gestión Educativa", "Veterinaria", "Zootecnia" }));
+        comboBoxCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCarreraActionPerformed(evt);
+            }
+        });
+        panelProcesoForm.add(comboBoxCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, -1, -1));
+
+        comboBoxSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baní", "Barahona", "Bonao", "Duvergé", "Hato Mayor", "Higuey", "La Romana", "La Vega", "Nagua", "Neiba", "Puerto Plata", "Samaná", "San Cristóbal", "San Francisco de Macorís", "San Juan de la Maguana", "San Pedro de Macorís", "Santiago", "Santiago Rodríguez", "Santo Domingo", "Valverde-Mao" }));
+        panelProcesoForm.add(comboBoxSede, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 150, -1));
 
         panelMain.add(panelProcesoForm, "card7");
+
+        panelConfirmacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnConfirmarReg.setText("Confirmar registro");
+        btnConfirmarReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarRegActionPerformed(evt);
+            }
+        });
+        panelConfirmacion.add(btnConfirmarReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, -1, -1));
+
+        panelMain.add(panelConfirmacion, "card9");
 
         getContentPane().add(panelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 780, 650));
 
@@ -629,9 +803,10 @@ public class Principal extends javax.swing.JFrame {
         panelMain.revalidate();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnAgregarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFotoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+        seleccionarArchivo(textFieldFoto, 0);
+    }//GEN-LAST:event_btnAgregarFotoActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -672,41 +847,30 @@ public class Principal extends javax.swing.JFrame {
         panelMain.revalidate();
     }//GEN-LAST:event_jButton13ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textFieldKardexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldKardexActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textFieldKardexActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void textFieldFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldFotoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_textFieldFotoActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void textFieldReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldReciboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_textFieldReciboActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void textFieldNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldNotasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_textFieldNotasActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    private void textFieldCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCedulaActionPerformed
+        
+    }//GEN-LAST:event_textFieldCedulaActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void radioBtnPasantiaSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPasantiaSIActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+        estudiante.setPasantia("SI");
+    }//GEN-LAST:event_radioBtnPasantiaSIActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
@@ -726,15 +890,99 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+    private void btnSiguienteFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteFormActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton15ActionPerformed
+        
+        if(radioBtnPasantiaSI.isSelected() || radioBtnPasantiaNO.isSelected())
+        {
+            //PARA GUARDAR DATOS EN EL FORMULARIO EN LA CLASE ESTUDIANTE
+            estudiante.setNombre(tFieldnombre.getText());
+            estudiante.setApellido(tFieldApellido.getText());
+            estudiante.setMatricula(tFieldMatricula.getText());
+            estudiante.setDireccion(concatDireccion());
+            estudiante.setCedula(tFieldCedula.getText());
+            estudiante.setNacionalidad(tFieldNacionalidad.getText());
+
+            String cbCarrera = comboBoxSede.getSelectedItem().toString();
+            estudiante.setCarrera(cbCarrera);
+
+            String cbSede = comboBoxSede.getSelectedItem().toString();
+            estudiante.setSede(cbSede);
+            estudiante.setTelefono(tFieldTelefono.getText());
+            estudiante.setCorreo(tFieldCorreo.getText());
+            
+            //remove all panel
+            panelMain.removeAll();
+            panelMain.repaint();
+            panelMain.revalidate();
+
+            //ADD PANEL
+            panelMain.add(panelConfirmacion);
+            panelMain.repaint();
+            panelMain.revalidate();
+        } else {
+            //JOptionPane optionPane = new JOptionPane("thank you for using java",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debes seleccionar si completo la pasantia");
+        } 
+    }//GEN-LAST:event_btnSiguienteFormActionPerformed
+
+    private void btnAgregarKardexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarKardexActionPerformed
+        // TODO add your handling code here:
+        seleccionarArchivo(textFieldKardex, 1);
+    }//GEN-LAST:event_btnAgregarKardexActionPerformed
+
+    private void btnAgregarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarNotasActionPerformed
+        // TODO add your handling code here:
+        seleccionarArchivo(textFieldNotas, 2);
+    }//GEN-LAST:event_btnAgregarNotasActionPerformed
+
+    private void btnAgregarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCedulaActionPerformed
+        // TODO add your handling code here:
+        seleccionarArchivo(textFieldCedula, 3);
+    }//GEN-LAST:event_btnAgregarCedulaActionPerformed
+
+    private void btnAgregarReciboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarReciboActionPerformed
+        // TODO add your handling code here:
+        seleccionarArchivo(textFieldRecibo, 4);
+    }//GEN-LAST:event_btnAgregarReciboActionPerformed
+
+    private void radioBtnPasantiaNOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPasantiaNOActionPerformed
+        // TODO add your handling code here:
+        estudiante.setPasantia("no");
+    }//GEN-LAST:event_radioBtnPasantiaNOActionPerformed
+
+    private void btnConfirmarRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarRegActionPerformed
+        // TODO add your handling code here:
+        LocalizaIdDoc idDoc = new LocalizaIdDoc();
+        int idLocalizado = idDoc.auto_increment("SELECT MAX(iddocumentos) FROM documento;");
+        estudiante.setIdDocumento(idLocalizado);
+        DAOmono DAOForm = new DAOmono();
+        guardar_documentos(ruta_archivo);
+        DAOForm.agregarFormulario(estudiante);
+        
+        
+        
+        
+    }//GEN-LAST:event_btnConfirmarRegActionPerformed
+
+    private void comboBoxCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCarreraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxCarreraActionPerformed
+
+    private void comboBoxListaCarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxListaCarrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxListaCarrActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -766,14 +1014,20 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarCedula;
+    private javax.swing.JButton btnAgregarFoto;
+    private javax.swing.JButton btnAgregarKardex;
+    private javax.swing.JButton btnAgregarNotas;
+    private javax.swing.JButton btnAgregarRecibo;
+    private javax.swing.JButton btnConfirmarReg;
+    private javax.swing.JButton btnSiguienteForm;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> comboBoxCarrera;
+    private javax.swing.JComboBox<String> comboBoxListaCarr;
+    private javax.swing.JComboBox<String> comboBoxSede;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
@@ -782,7 +1036,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -797,7 +1050,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -811,11 +1063,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -823,27 +1074,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel panelAyuda;
+    private javax.swing.JPanel panelConfirmacion;
     private javax.swing.JPanel panelConsulta;
     private javax.swing.JPanel panelInicio;
     private javax.swing.JPanel panelInscripcion;
@@ -852,5 +1084,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel panelProcesoArchivos;
     private javax.swing.JPanel panelProcesoForm;
     private javax.swing.JPanel panelRegistro;
+    private javax.swing.JRadioButton radioBtnPasantiaNO;
+    private javax.swing.JRadioButton radioBtnPasantiaSI;
+    private javax.swing.JTextField tFieldApellido;
+    private javax.swing.JTextField tFieldCedula;
+    private javax.swing.JTextField tFieldCorreo;
+    private javax.swing.JTextField tFieldDireccion;
+    private javax.swing.JTextField tFieldMatricula;
+    private javax.swing.JTextField tFieldNacionalidad;
+    private javax.swing.JTextField tFieldProvincia;
+    private javax.swing.JTextField tFieldSector;
+    private javax.swing.JTextField tFieldTelefono;
+    private javax.swing.JTextField tFieldnombre;
+    private javax.swing.JTextField textFieldCedula;
+    private javax.swing.JTextField textFieldFoto;
+    private javax.swing.JTextField textFieldKardex;
+    private javax.swing.JTextField textFieldNotas;
+    private javax.swing.JTextField textFieldRecibo;
     // End of variables declaration//GEN-END:variables
+
+  
 }
