@@ -37,6 +37,7 @@ public class Estudiante extends Formulario{
     carrera = "";
     telefono = "";
     correo = "";
+   
     }
 
     public Estudiante( String sede, String pasantia) {

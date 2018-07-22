@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteRI" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="410d1450-1ecb-4f00-9add-4759a49c8295">
+	<property name="ireport.zoom" value="1.126972201352367"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="carreraParam" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from estudiantes where FKcarrera=$P{carreraParam}]]>
+	</queryString>
+	<field name="idestudiantes" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="matricula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellido" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cedula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FKcarrera" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FKnacionalidad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pasantia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FKsede" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FKdocumentos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="180" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="163" y="71" width="337" height="33" uuid="a53b214a-571c-4b0b-8503-f0cd0dc307aa"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Lucida Bright" size="24"/>
+				</textElement>
+				<text><![CDATA[LISTA DE ESTUDIANTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="106" y="26" width="450" height="33" uuid="86f11280-0fb1-4ddc-9557-9eb19f4edbfd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[UNIVERSIDAD AUTONOMA DE SANTO DOMINGO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="10" width="140" height="121" uuid="c91d4130-61e9-40fc-84fa-55113b7e983e"/>
+				<imageExpression><![CDATA["/Users/elianahgx/NetBeansProjects/InscripcionDeMonografico/src/reportes/uasdlogo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="10" y="142" width="450" height="33" uuid="f3a4c18a-8065-4bb2-af16-ee6c53e99e05"/>
+				<textElement verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Curso de monografico]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="56" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="14" width="272" height="20" uuid="58b2115d-68e6-42ae-9033-23d585ed2f59"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Escuela de "+$F{FKcarrera}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="185" y="16" width="185" height="15" forecolor="#FFFFFF" backcolor="#999999" uuid="8abf1ed4-f4bd-4ab9-8af1-a96696748ac4"/>
+				<textElement>
+					<font fontName="Lucida Bright"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="370" y="16" width="185" height="15" forecolor="#FFFFFF" backcolor="#999999" uuid="26271f1e-8e66-452c-94c2-889e43d70c70"/>
+				<textElement>
+					<font fontName="Lucida Bright"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="0" y="16" width="185" height="15" forecolor="#FFFFFF" backcolor="#999999" uuid="416fd51e-2db8-44cb-91e4-927a68c46544"/>
+				<textElement>
+					<font fontName="Lucida Bright"/>
+				</textElement>
+				<text><![CDATA[Matricula]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="4" y="25" width="551" height="1" uuid="b4015814-51e7-4287-beb3-8b630fe6afa8"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" mode="Opaque" x="2" y="0" width="183" height="15" backcolor="#E5E5E5" uuid="4d1c8e3d-95ec-427f-b8c1-f3707a6f1311">
+					<property name="net.sf.jasperreports.export.pdf.tag.tr" value="full"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Lucida Bright" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" mode="Opaque" x="187" y="0" width="183" height="15" backcolor="#E5E5E5" uuid="221d4896-964b-411c-9aee-b2c1032e4df3"/>
+				<textElement>
+					<font fontName="Lucida Bright" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" mode="Opaque" x="372" y="0" width="183" height="15" backcolor="#E5E5E5" uuid="7871b9cf-0ecb-4b34-93bc-1ee7fb9fbf0f"/>
+				<textElement>
+					<font fontName="Lucida Bright" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="27" y="31" width="269" height="15" forecolor="#F7F7F7" backcolor="#999999" uuid="be21a7a6-8f6e-45e1-86f1-7ff58f03738f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cantidad inscritas "+$V{REPORT_COUNT}+" estudiantes"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="27" y="60" width="353" height="15" forecolor="#F2F2F2" backcolor="#FF6666" uuid="b308df78-a708-4e4f-9054-a46e95f39e12"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Faltan "+((30) - ($V{REPORT_COUNT}.longValue()))+" estudiantes para poder abrir el curso del monografico"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="27" y="80" width="353" height="15" forecolor="#F2F2F2" backcolor="#FF6666" uuid="4acfc04f-5dc6-4dc7-9478-98da3e8e1a08"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["En caso debera pagar RD\$ "+
+(
+    (((30) - ($V{REPORT_COUNT}.longValue()))*(10000))
+    /($V{REPORT_COUNT}.longValue())
+
+)+" cada estudiante inscrito"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="91" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

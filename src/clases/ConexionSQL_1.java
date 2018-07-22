@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author elianahgx
  */
-public class ConexionSQL {
+public class ConexionSQL_1 {
     
     Connection con = null;
     //String DB = "pruebaDB"; 
@@ -23,7 +23,7 @@ public class ConexionSQL {
     //String password = "amordoce12";
     //String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     
-    public void conectar(){
+    public Connection getConexion(){
         
       
             try {
@@ -40,12 +40,10 @@ public class ConexionSQL {
                 System.out.println(ex.getMessage());
                 System.out.println("EXEPCION 22");
             }
+            return con;
     }
     
-    public Connection conexionReturn(){
-        return con;
-    }
-    
+ 
     public void desconectar() {
         try {
             con.close();

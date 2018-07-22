@@ -16,6 +16,16 @@ public class ArchivosDoc {
     byte[] recibo;
     byte[] kardex;
 
+    public ArchivosDoc() {
+        this.foto = null;
+        this.recNotas = null;
+        this.cedula = null;
+        this.recibo = null;
+        this.kardex = null;
+    }
+
+    
+    
     public byte[] getFoto() {
         return foto;
     }

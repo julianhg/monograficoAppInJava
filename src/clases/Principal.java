@@ -5,17 +5,36 @@
  */
 package clases;
 
+import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.TextField;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javax.swing.ButtonGroup;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import reportes.GenerarReportes;
 
 /**
  *
@@ -30,15 +49,19 @@ public class Principal extends javax.swing.JFrame {
     
     Estudiante estudiante = null;
     ArchivosDoc documentos = null;
-    ButtonGroup grupoRadio1;
+    ButtonGroup grupoRadio1, grupoRadio2;
     
     
     public Principal() {
         initComponents();
         grupoRadio1 = new ButtonGroup();
+        grupoRadio2 = new ButtonGroup();
         
         grupoRadio1.add(radioBtnPasantiaSI);
         grupoRadio1.add(radioBtnPasantiaNO);
+        
+        grupoRadio2.add(radioBtnPasantiaSIConfirm);
+        grupoRadio2.add(radioBtnPasantiaNOConfirm);
         
         this.setLocationRelativeTo(null);
         //this.setExtendedState(MAXIMIZED_BOTH);
@@ -59,7 +82,7 @@ public class Principal extends javax.swing.JFrame {
     }
     //CONCATENAR DIRECCION, SECTOR Y PROVINCIA
     public String concatDireccion(){
-        return ""+tFieldDireccion.getText()+", "+tFieldSector.getText()+", "+tFieldProvincia.getText()+"";
+        return ""+tFieldDireccion.getText()+", "+tFieldSector.getText()+", "+tFieldProvincia.getSelectedItem().toString()+"";
     }
     
     
@@ -147,7 +170,20 @@ public class Principal extends javax.swing.JFrame {
         
         DAOm.agregarDoc(documentos);
     }
- 
+    
+    
+    public void abrirFichero(String ruta){
+    Desktop ficheroAEjecutar=Desktop.getDesktop();
+    try {
+         ficheroAEjecutar.open(new File(ruta));
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, 
+                                       e.getMessage(), 
+                                       "Error", 
+                                       JOptionPane.ERROR_MESSAGE);
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,7 +212,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         comboBoxListaCarr = new javax.swing.JComboBox<>();
-        jButton8 = new javax.swing.JButton();
+        btnVerListado = new javax.swing.JButton();
         panelAyuda = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         panelRegistro = new javax.swing.JPanel();
@@ -233,24 +269,69 @@ public class Principal extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         tFieldSector = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        tFieldProvincia = new javax.swing.JTextField();
-        tFieldCedula = new javax.swing.JTextField();
         radioBtnPasantiaSI = new javax.swing.JRadioButton();
         radioBtnPasantiaNO = new javax.swing.JRadioButton();
         tFieldNacionalidad = new javax.swing.JTextField();
         tFieldCorreo = new javax.swing.JTextField();
-        tFieldTelefono = new javax.swing.JTextField();
         btnSiguienteForm = new javax.swing.JButton();
         comboBoxCarrera = new javax.swing.JComboBox<>();
         comboBoxSede = new javax.swing.JComboBox<>();
+        tFieldTelefono = new javax.swing.JFormattedTextField();
+        tFieldCedula = new javax.swing.JFormattedTextField();
+        tFieldProvincia = new javax.swing.JComboBox<>();
         panelConfirmacion = new javax.swing.JPanel();
         btnConfirmarReg = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        labelProvincia = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        editarTelefono = new javax.swing.JLabel();
+        labelCedula = new javax.swing.JLabel();
+        labelApellido = new javax.swing.JLabel();
+        labelNacionalidad = new javax.swing.JLabel();
+        labelRecinto = new javax.swing.JLabel();
+        labelMatricula = new javax.swing.JLabel();
+        labelPasantia = new javax.swing.JLabel();
+        labelCorreo = new javax.swing.JLabel();
+        labelCarrera = new javax.swing.JLabel();
+        labelTelefono = new javax.swing.JLabel();
+        tfDireccion = new javax.swing.JTextField();
+        tfNombre = new javax.swing.JTextField();
+        tfMatricula = new javax.swing.JTextField();
+        tfTelefono = new javax.swing.JTextField();
+        tfNacionalidad = new javax.swing.JTextField();
+        tfApellido = new javax.swing.JTextField();
+        tfCedula = new javax.swing.JTextField();
+        tfCorreo = new javax.swing.JTextField();
+        tfProvincia = new javax.swing.JTextField();
+        tfSector = new javax.swing.JTextField();
+        labelNombre1 = new javax.swing.JLabel();
+        editarCorreo = new javax.swing.JLabel();
+        editarMatricula = new javax.swing.JLabel();
+        editarDireccion = new javax.swing.JLabel();
+        editarSector = new javax.swing.JLabel();
+        editarProvincia = new javax.swing.JLabel();
+        editarNacionalidad = new javax.swing.JLabel();
+        editarRecinto = new javax.swing.JLabel();
+        editarNombre = new javax.swing.JLabel();
+        editarApellido = new javax.swing.JLabel();
+        editarCedula = new javax.swing.JLabel();
+        editarCarrera = new javax.swing.JLabel();
+        editarPasantia = new javax.swing.JLabel();
+        labelDireccion = new javax.swing.JLabel();
+        labelSector = new javax.swing.JLabel();
+        comboBoxCarreraConfirm = new javax.swing.JComboBox<>();
+        comboBoxSedeConfirm = new javax.swing.JComboBox<>();
+        radioBtnPasantiaSIConfirm = new javax.swing.JRadioButton();
+        radioBtnPasantiaNOConfirm = new javax.swing.JRadioButton();
+        jButton8 = new javax.swing.JButton();
+        panelCompletado = new javax.swing.JPanel();
+        jLabel33 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(950, 600));
+        setPreferredSize(new java.awt.Dimension(1152, 720));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelMenu.setBackground(new java.awt.Color(99, 205, 218));
+        panelMenu.setBackground(new java.awt.Color(74, 119, 186));
 
         jButton1.setText("LISTA DE ESTUDIANTES");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -312,10 +393,10 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 650));
+        getContentPane().add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 720));
 
         panelMain.setLayout(new java.awt.CardLayout());
 
@@ -330,18 +411,19 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(panelInicioLayout.createSequentialGroup()
                 .addGap(233, 233, 233)
                 .addComponent(jLabel1)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(517, Short.MAX_VALUE))
         );
         panelInicioLayout.setVerticalGroup(
             panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInicioLayout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addComponent(jLabel1)
-                .addContainerGap(522, Short.MAX_VALUE))
+                .addContainerGap(592, Short.MAX_VALUE))
         );
 
         panelMain.add(panelInicio, "card2");
 
+        panelInscripcion.setPreferredSize(new java.awt.Dimension(932, 720));
         panelInscripcion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
@@ -356,10 +438,10 @@ public class Principal extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        panelInscripcion.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 220, 70));
+        panelInscripcion.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 220, 70));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Webp.net-resizeimage (3).png"))); // NOI18N
-        panelInscripcion.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 250, 200));
+        panelInscripcion.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 500, 250, 200));
 
         panelMain.add(panelInscripcion, "card3");
 
@@ -377,10 +459,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setText("VER LISTADO");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnVerListado.setText("VER LISTADO");
+        btnVerListado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnVerListadoActionPerformed(evt);
             }
         });
 
@@ -399,9 +481,9 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(panelConsultaLayout.createSequentialGroup()
                                 .addComponent(comboBoxListaCarr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton8))
+                                .addComponent(btnVerListado))
                             .addComponent(jLabel6))))
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addContainerGap(478, Short.MAX_VALUE))
         );
         panelConsultaLayout.setVerticalGroup(
             panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,8 +495,8 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxListaCarr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8))
-                .addContainerGap(372, Short.MAX_VALUE))
+                    .addComponent(btnVerListado))
+                .addContainerGap(442, Short.MAX_VALUE))
         );
 
         panelMain.add(panelConsulta, "card4");
@@ -430,18 +512,19 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(panelAyudaLayout.createSequentialGroup()
                 .addGap(233, 233, 233)
                 .addComponent(jLabel4)
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addContainerGap(602, Short.MAX_VALUE))
         );
         panelAyudaLayout.setVerticalGroup(
             panelAyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAyudaLayout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addComponent(jLabel4)
-                .addContainerGap(522, Short.MAX_VALUE))
+                .addContainerGap(592, Short.MAX_VALUE))
         );
 
         panelMain.add(panelAyuda, "card5");
 
+        panelRegistro.setPreferredSize(new java.awt.Dimension(932, 720));
         panelRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Andale Mono", 1, 18)); // NOI18N
@@ -468,6 +551,7 @@ public class Principal extends javax.swing.JFrame {
 
         panelMain.add(panelRegistro, "card6");
 
+        panelProcesoArchivos.setPreferredSize(new java.awt.Dimension(932, 720));
         panelProcesoArchivos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
@@ -597,6 +681,7 @@ public class Principal extends javax.swing.JFrame {
 
         panelMain.add(panelProcesoArchivos, "card7");
 
+        panelProcesoForm.setPreferredSize(new java.awt.Dimension(932, 720));
         panelProcesoForm.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel18.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
@@ -665,6 +750,12 @@ public class Principal extends javax.swing.JFrame {
         panelProcesoForm.add(tFieldMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 146, -1));
         panelProcesoForm.add(tFieldDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 223, 250, -1));
         panelProcesoForm.add(tFieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 210, -1));
+
+        tFieldnombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tFieldnombreFocusGained(evt);
+            }
+        });
         panelProcesoForm.add(tFieldnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 220, -1));
 
         jLabel31.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
@@ -675,8 +766,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel32.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel32.setText("Provincia");
         panelProcesoForm.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, -1, -1));
-        panelProcesoForm.add(tFieldProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 223, 165, -1));
-        panelProcesoForm.add(tFieldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 140, -1));
 
         radioBtnPasantiaSI.setText("SI");
         radioBtnPasantiaSI.addActionListener(new java.awt.event.ActionListener() {
@@ -695,7 +784,6 @@ public class Principal extends javax.swing.JFrame {
         panelProcesoForm.add(radioBtnPasantiaNO, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 377, -1, -1));
         panelProcesoForm.add(tFieldNacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 300, 140, -1));
         panelProcesoForm.add(tFieldCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 200, -1));
-        panelProcesoForm.add(tFieldTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 135, -1));
 
         btnSiguienteForm.setText("Siguiente");
         btnSiguienteForm.addActionListener(new java.awt.event.ActionListener() {
@@ -716,21 +804,317 @@ public class Principal extends javax.swing.JFrame {
         comboBoxSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baní", "Barahona", "Bonao", "Duvergé", "Hato Mayor", "Higuey", "La Romana", "La Vega", "Nagua", "Neiba", "Puerto Plata", "Samaná", "San Cristóbal", "San Francisco de Macorís", "San Juan de la Maguana", "San Pedro de Macorís", "Santiago", "Santiago Rodríguez", "Santo Domingo", "Valverde-Mao" }));
         panelProcesoForm.add(comboBoxSede, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 150, -1));
 
+        try {
+            tFieldTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-###-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        panelProcesoForm.add(tFieldTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 140, -1));
+
+        try {
+            tFieldCedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-#######-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        panelProcesoForm.add(tFieldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 140, -1));
+
+        tFieldProvincia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azua", "Bahoruco", "Barahona", "Dajabón", "Distrito Nacional", "Duarte", "El Seibo", "Elías Piña", "Espaillat", "Hato Mayor", "Hermanas Mirabal", "Independencia", "La Altagracia", "La Romana", "La Vega", "María Trinidad Sánchez", "Monseñor Nouel", "Monte Plata", "Montecristi", "Pedernales", "Peravia", "Puerto Plata", "Samaná", "San Cristóbal", "San José de Ocoa", "San Juan", "San Pedro de Maco", "Santiago", "Santiago Rodríguez", "Santo Domingo", "Sánchez Ramírez", "Valverde" }));
+        panelProcesoForm.add(tFieldProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, -1, -1));
+
         panelMain.add(panelProcesoForm, "card7");
 
+        panelConfirmacion.setPreferredSize(new java.awt.Dimension(932, 720));
         panelConfirmacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnConfirmarReg.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         btnConfirmarReg.setText("Confirmar registro");
         btnConfirmarReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarRegActionPerformed(evt);
             }
         });
-        panelConfirmacion.add(btnConfirmarReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, -1, -1));
+        panelConfirmacion.add(btnConfirmarReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 649, -1, 40));
+
+        jLabel22.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel22.setText("Revisar y confirmar");
+        panelConfirmacion.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        labelProvincia.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelProvincia.setText("provincia");
+        panelConfirmacion.add(labelProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 80, -1));
+
+        jLabel34.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel34.setText("INFORMACION DEL ESTUDIANTE");
+        panelConfirmacion.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 280, -1));
+
+        editarTelefono.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarTelefono.setForeground(java.awt.Color.blue);
+        editarTelefono.setText("Editar");
+        editarTelefono.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarTelefono.setOpaque(true);
+        editarTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarTelefonoMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 60, 20));
+
+        labelCedula.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelCedula.setText("cedula");
+        panelConfirmacion.add(labelCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 90, -1));
+
+        labelApellido.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelApellido.setText("apellido");
+        panelConfirmacion.add(labelApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 90, -1));
+
+        labelNacionalidad.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelNacionalidad.setText("nacionalidad");
+        panelConfirmacion.add(labelNacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 120, -1));
+
+        labelRecinto.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelRecinto.setText("recinto");
+        panelConfirmacion.add(labelRecinto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 80, -1));
+
+        labelMatricula.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelMatricula.setText("matricula");
+        panelConfirmacion.add(labelMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 80, -1));
+
+        labelPasantia.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelPasantia.setText("pasantia");
+        panelConfirmacion.add(labelPasantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 90, -1));
+
+        labelCorreo.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelCorreo.setText("email");
+        panelConfirmacion.add(labelCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 70, -1));
+
+        labelCarrera.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelCarrera.setText("carrera");
+        panelConfirmacion.add(labelCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 90, -1));
+
+        labelTelefono.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelTelefono.setText("telefono");
+        panelConfirmacion.add(labelTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 80, -1));
+        panelConfirmacion.add(tfDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 230, -1));
+        panelConfirmacion.add(tfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 230, -1));
+
+        tfMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfMatriculaActionPerformed(evt);
+            }
+        });
+        panelConfirmacion.add(tfMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 230, -1));
+        panelConfirmacion.add(tfTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 230, -1));
+        panelConfirmacion.add(tfNacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 230, -1));
+        panelConfirmacion.add(tfApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 230, -1));
+        panelConfirmacion.add(tfCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 230, -1));
+        panelConfirmacion.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 230, -1));
+        panelConfirmacion.add(tfProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 230, -1));
+        panelConfirmacion.add(tfSector, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 230, -1));
+
+        labelNombre1.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelNombre1.setText("nombre");
+        panelConfirmacion.add(labelNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 80, -1));
+
+        editarCorreo.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarCorreo.setForeground(java.awt.Color.blue);
+        editarCorreo.setText("Editar");
+        editarCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarCorreo.setOpaque(true);
+        editarCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarCorreoMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 60, 20));
+
+        editarMatricula.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarMatricula.setForeground(java.awt.Color.blue);
+        editarMatricula.setText("Editar");
+        editarMatricula.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarMatricula.setOpaque(true);
+        editarMatricula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarMatriculaMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 60, 20));
+
+        editarDireccion.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarDireccion.setForeground(java.awt.Color.blue);
+        editarDireccion.setText("Editar");
+        editarDireccion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarDireccion.setOpaque(true);
+        editarDireccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarDireccionMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 60, 20));
+
+        editarSector.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarSector.setForeground(java.awt.Color.blue);
+        editarSector.setText("Editar");
+        editarSector.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarSector.setOpaque(true);
+        editarSector.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarSectorMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarSector, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 210, 60, 20));
+
+        editarProvincia.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarProvincia.setForeground(java.awt.Color.blue);
+        editarProvincia.setText("Editar");
+        editarProvincia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarProvincia.setOpaque(true);
+        editarProvincia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarProvinciaMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 60, 20));
+
+        editarNacionalidad.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarNacionalidad.setForeground(java.awt.Color.blue);
+        editarNacionalidad.setText("Editar");
+        editarNacionalidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarNacionalidad.setOpaque(true);
+        editarNacionalidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarNacionalidadMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarNacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 250, 60, 20));
+
+        editarRecinto.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarRecinto.setForeground(java.awt.Color.blue);
+        editarRecinto.setText("Editar");
+        editarRecinto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarRecinto.setOpaque(true);
+        editarRecinto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarRecintoMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarRecinto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 70, 20));
+
+        editarNombre.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarNombre.setForeground(java.awt.Color.blue);
+        editarNombre.setText("Editar");
+        editarNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarNombre.setOpaque(true);
+        editarNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarNombreMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 60, 20));
+
+        editarApellido.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarApellido.setForeground(java.awt.Color.blue);
+        editarApellido.setText("Editar");
+        editarApellido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarApellido.setOpaque(true);
+        editarApellido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarApellidoMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 130, 60, 20));
+
+        editarCedula.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarCedula.setForeground(java.awt.Color.blue);
+        editarCedula.setText("Editar");
+        editarCedula.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarCedula.setOpaque(true);
+        editarCedula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarCedulaMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 170, 60, 20));
+
+        editarCarrera.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarCarrera.setForeground(java.awt.Color.blue);
+        editarCarrera.setText("Editar");
+        editarCarrera.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarCarrera.setOpaque(true);
+        editarCarrera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarCarreraMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 290, 60, 20));
+
+        editarPasantia.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editarPasantia.setForeground(java.awt.Color.blue);
+        editarPasantia.setText("Editar");
+        editarPasantia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarPasantia.setOpaque(true);
+        editarPasantia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarPasantiaMouseClicked(evt);
+            }
+        });
+        panelConfirmacion.add(editarPasantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, 70, 20));
+
+        labelDireccion.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelDireccion.setText("direccion");
+        panelConfirmacion.add(labelDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 80, -1));
+
+        labelSector.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        labelSector.setText("sector");
+        panelConfirmacion.add(labelSector, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 90, -1));
+
+        comboBoxCarreraConfirm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administración", "Agrimensura", "Agronomía", "Arquitectura", "Artes Plásticas", "Bibliotecología", "Bioanálisis", "Biología", "Ciencias Fisilógicas", "Ciencias Geográficas", "Ciencias Morfológicas", "Cine TV-Fotografía", "Comunicación Social", "Contabilidad", "Crítica e Historia del Arte", "Diseño Industrial y Moda", "Economía", "Educación Infantil y Básicas", "Educación Media", "Enfermería", "Escuela de Idiomas", "Estadística", "Farmacia", "Filosofía", "Física", "Física Y Deporte", "Historia y Antropología", "Idioma", "Informática", "Ingeniería Civil", "Ingeniería Electromecánica", "Ingeniería Industrial", "Ingeniería Química", "Letras", "Matemática", "Medicina", "Mercadotecnia", "Micro biología y Parasitología", "Música", "Odontología", "Orientación Profesional", "Orientación y Pedagogía", "Pedagogía", "Psicología", "Publicidad", "Química", "Salud Pública", "Sociología", "Teatro", "Teoría y Gestión Educativa", "Veterinaria", "Zootecnia" }));
+        comboBoxCarreraConfirm.setOpaque(true);
+        comboBoxCarreraConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCarreraConfirmActionPerformed(evt);
+            }
+        });
+        panelConfirmacion.add(comboBoxCarreraConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, -1, -1));
+
+        comboBoxSedeConfirm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baní", "Barahona", "Bonao", "Duvergé", "Hato Mayor", "Higuey", "La Romana", "La Vega", "Nagua", "Neiba", "Puerto Plata", "Samaná", "San Cristóbal", "San Francisco de Macorís", "San Juan de la Maguana", "San Pedro de Macorís", "Santiago", "Santiago Rodríguez", "Santo Domingo", "Valverde-Mao" }));
+        panelConfirmacion.add(comboBoxSedeConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 150, -1));
+
+        radioBtnPasantiaSIConfirm.setText("SI");
+        radioBtnPasantiaSIConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnPasantiaSIConfirmActionPerformed(evt);
+            }
+        });
+        panelConfirmacion.add(radioBtnPasantiaSIConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 330, -1, -1));
+
+        radioBtnPasantiaNOConfirm.setText("NO");
+        radioBtnPasantiaNOConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnPasantiaNOConfirmActionPerformed(evt);
+            }
+        });
+        panelConfirmacion.add(radioBtnPasantiaNOConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 330, -1, -1));
+
+        jButton8.setText("jButton8");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        panelConfirmacion.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, -1, -1));
 
         panelMain.add(panelConfirmacion, "card9");
 
-        getContentPane().add(panelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 780, 650));
+        panelCompletado.setPreferredSize(new java.awt.Dimension(932, 720));
+        panelCompletado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel33.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        jLabel33.setText("SE HA REGISTRADO CON EXITO!");
+        panelCompletado.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, -1, 60));
+
+        panelMain.add(panelCompletado, "card9");
+
+        getContentPane().add(panelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 932, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -824,6 +1208,18 @@ public class Principal extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         //remove all panel
+        
+        if(textFieldCedula.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "La Cedula no pueda estar vacio");
+        }else if(textFieldFoto.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "La Foto no puede estar Vacio");
+        }else if(textFieldKardex.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El Kardex no puede estar vacio");
+        }else if(textFieldNotas.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "La Nota no puede estar vacia");
+        }else if(textFieldRecibo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El Recibo no puede estar vacio");
+        }else{
         panelMain.removeAll();
         panelMain.repaint();
         panelMain.revalidate();
@@ -832,6 +1228,8 @@ public class Principal extends javax.swing.JFrame {
         panelMain.add(panelProcesoForm);
         panelMain.repaint();
         panelMain.revalidate();
+        }
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -886,11 +1284,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
+        limpiarRegistro();
 
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void btnSiguienteFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteFormActionPerformed
+
+        
         // TODO add your handling code here:
         
         if(radioBtnPasantiaSI.isSelected() || radioBtnPasantiaNO.isSelected())
@@ -903,13 +1303,46 @@ public class Principal extends javax.swing.JFrame {
             estudiante.setCedula(tFieldCedula.getText());
             estudiante.setNacionalidad(tFieldNacionalidad.getText());
 
-            String cbCarrera = comboBoxSede.getSelectedItem().toString();
+            String cbCarrera = comboBoxCarrera.getSelectedItem().toString();
             estudiante.setCarrera(cbCarrera);
 
             String cbSede = comboBoxSede.getSelectedItem().toString();
             estudiante.setSede(cbSede);
+            
             estudiante.setTelefono(tFieldTelefono.getText());
             estudiante.setCorreo(tFieldCorreo.getText());
+            
+          
+            //EXTRAER DATOS PARA REVISAR Y CONFIRMAR INFORMACION
+            tfNombre.setText(tFieldnombre.getText());
+            tfApellido.setText(tFieldApellido.getText());
+            tfMatricula.setText(tFieldMatricula.getText());
+            tfCedula.setText(tFieldCedula.getText());
+            tfDireccion.setText(tFieldDireccion.getText());
+            tfSector.setText(tFieldSector.getText());
+            tfProvincia.setText(tFieldProvincia.getSelectedItem().toString());
+            tfNacionalidad.setText(tFieldNacionalidad.getText());
+            comboBoxCarreraConfirm.setSelectedItem(comboBoxCarrera.getSelectedItem());
+            comboBoxSedeConfirm.setSelectedItem(comboBoxSede.getSelectedItem());
+            radioBtnPasantiaSIConfirm.setSelected(radioBtnPasantiaSI.isSelected());
+            radioBtnPasantiaNOConfirm.setSelected(radioBtnPasantiaNO.isSelected());
+            tfTelefono.setText(estudiante.getTelefono());
+            tfCorreo.setText(estudiante.getCorreo());
+                //deshabilitar ediccion de campos en confirmar
+                tfNombre.setEnabled(false);
+                tfApellido.setEnabled(false);
+                tfMatricula.setEnabled(false);
+                tfCedula.setEnabled(false);
+                tfDireccion.setEnabled(false);
+                tfSector.setEnabled(false);
+                tfProvincia.setEnabled(false);
+                tfNacionalidad.setEnabled(false);
+                tfTelefono.setEnabled(false);
+                tfCorreo.setEnabled(false);
+                radioBtnPasantiaNOConfirm.setEnabled(false);
+                radioBtnPasantiaSIConfirm.setEnabled(false);
+                comboBoxCarreraConfirm.setEnabled(false);
+                comboBoxSedeConfirm.setEnabled(false);
             
             //remove all panel
             panelMain.removeAll();
@@ -960,7 +1393,27 @@ public class Principal extends javax.swing.JFrame {
         guardar_documentos(ruta_archivo);
         DAOForm.agregarFormulario(estudiante);
         
+        //remove all panel
+        panelMain.removeAll();
+        panelMain.repaint();
+        panelMain.revalidate();
         
+        //ADD PANEL
+        panelMain.add(panelCompletado);
+        panelMain.repaint();
+        panelMain.revalidate();
+        
+        //Limpiar todos los registros y datos de inscripcion
+        limpiarRegistro();
+        ruta_nombreArchivo = "";
+        ruta_archivo[0] = null;
+        ruta_archivo[1] = null;
+        ruta_archivo[2] = null;
+        ruta_archivo[3] = null;
+        ruta_archivo[4] = null;
+        
+        estudiante = new Estudiante();
+        documentos = new ArchivosDoc();
         
         
     }//GEN-LAST:event_btnConfirmarRegActionPerformed
@@ -973,10 +1426,256 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxListaCarrActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void btnVerListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerListadoActionPerformed
+        String cbCarreraLista = comboBoxListaCarr.getSelectedItem().toString();
 
+        
+        GenerarReportes r = new GenerarReportes();
+        try {
+
+            r.generarReporte("reportex.jasper", cbCarreraLista);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
+       
+    }//GEN-LAST:event_btnVerListadoActionPerformed
+ 
+    private void tFieldnombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tFieldnombreFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tFieldnombreFocusGained
+
+    private void tfMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMatriculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfMatriculaActionPerformed
+
+    private void comboBoxCarreraConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCarreraConfirmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxCarreraConfirmActionPerformed
+
+    private void radioBtnPasantiaSIConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPasantiaSIConfirmActionPerformed
+
+    }//GEN-LAST:event_radioBtnPasantiaSIConfirmActionPerformed
+
+    private void radioBtnPasantiaNOConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPasantiaNOConfirmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioBtnPasantiaNOConfirmActionPerformed
+    
+    boolean clickEditarNombre = false;
+    private void editarNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarNombreMouseClicked
+        clickEditarNombre = editarConfirmar(tfNombre, editarNombre, clickEditarNombre, "nombre");
+    }//GEN-LAST:event_editarNombreMouseClicked
+    
+    boolean clickEditarMatricula = false;
+    private void editarMatriculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarMatriculaMouseClicked
+       clickEditarMatricula = editarConfirmar(tfMatricula, editarMatricula, clickEditarMatricula, "matricula");
+        
+    }//GEN-LAST:event_editarMatriculaMouseClicked
+
+    boolean clickEditarDireccion  = false;
+    private void editarDireccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarDireccionMouseClicked
+        clickEditarDireccion = editarConfirmar(tfDireccion, editarDireccion, clickEditarDireccion, "direccion" );
+    }//GEN-LAST:event_editarDireccionMouseClicked
+
+    boolean clickEditarPasantia = false;
+    private void editarPasantiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarPasantiaMouseClicked
+         if(clickEditarPasantia == false){
+            radioBtnPasantiaNOConfirm.setEnabled(true);
+            radioBtnPasantiaSIConfirm.setEnabled(true);
+            editarPasantia.setText("Confirmar"); 
+            editarPasantia.setBackground(Color.yellow);
+            editarPasantia.setForeground(Color.red);
+            clickEditarPasantia = true;
+        } else {
+            clickEditarPasantia = false;
+            editarPasantia.setText("Editar");
+            editarPasantia.setBackground(null);
+            editarPasantia.setForeground(Color.BLUE);
+            radioBtnPasantiaNOConfirm.setEnabled(false);
+            radioBtnPasantiaSIConfirm.setEnabled(false);
+            
+            if(radioBtnPasantiaSI.isSelected()){
+                estudiante.setPasantia("si");
+            } else {
+                estudiante.setPasantia("no");
+            }
+            
+        }
+
+         
+        
+    }//GEN-LAST:event_editarPasantiaMouseClicked
+    
+    boolean clickEditarRecinto = false;
+    private void editarRecintoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarRecintoMouseClicked
+        if(clickEditarRecinto == false){
+            comboBoxSedeConfirm.setEnabled(true);
+            editarRecinto.setText("Confirmar"); 
+            editarRecinto.setBackground(Color.yellow);
+            editarRecinto.setForeground(Color.red);
+            clickEditarRecinto = true;
+        } else {
+            estudiante.setSede(comboBoxSedeConfirm.getSelectedItem().toString());
+            clickEditarRecinto = false;
+            editarRecinto.setText("Editar");
+            editarRecinto.setBackground(null);
+            editarRecinto.setForeground(Color.BLUE);
+            comboBoxSedeConfirm.setEnabled(false);
+            
+        }
+    }//GEN-LAST:event_editarRecintoMouseClicked
+    
+    boolean clickEditarCarrera = false;
+    private void editarCarreraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarCarreraMouseClicked
+        if(clickEditarCarrera == false){
+            comboBoxCarreraConfirm.setEnabled(true);
+            editarCarrera.setText("Confirmar"); 
+            editarCarrera.setBackground(Color.yellow);
+            editarCarrera.setForeground(Color.red);
+            clickEditarCarrera = true;
+        } else {
+            estudiante.setCarrera(comboBoxCarreraConfirm.getSelectedItem().toString());
+            clickEditarCarrera = false;
+            editarCarrera.setText("Editar");
+            editarCarrera.setBackground(null);
+            editarCarrera.setForeground(Color.BLUE);
+            comboBoxCarreraConfirm.setEnabled(false);
+            
+        }
+    }//GEN-LAST:event_editarCarreraMouseClicked
+
+    boolean clickEditarCedula = false;
+    private void editarCedulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarCedulaMouseClicked
+        clickEditarCedula = editarConfirmar(tfCedula, editarCedula, clickEditarCedula, "cedula");
+    }//GEN-LAST:event_editarCedulaMouseClicked
+
+    boolean clickEditarApellido = false;
+    private void editarApellidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarApellidoMouseClicked
+        clickEditarApellido = editarConfirmar(tfApellido, editarApellido, clickEditarApellido, "apellido");
+    }//GEN-LAST:event_editarApellidoMouseClicked
+    
+    boolean clickEditarSector = false;
+    private void editarSectorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarSectorMouseClicked
+        clickEditarSector = editarConfirmar(tfSector, editarSector, clickEditarSector, "sector");
+    }//GEN-LAST:event_editarSectorMouseClicked
+
+    boolean clickEditarProvincia = false;
+    private void editarProvinciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarProvinciaMouseClicked
+        clickEditarProvincia = editarConfirmar(tfProvincia, editarProvincia, clickEditarProvincia, "provincia");
+    }//GEN-LAST:event_editarProvinciaMouseClicked
+
+    boolean clickEditarNacionalidad = false;
+    private void editarNacionalidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarNacionalidadMouseClicked
+        clickEditarNacionalidad = editarConfirmar(tfNacionalidad, editarNacionalidad, clickEditarNacionalidad, "nacionalidad");
+    }//GEN-LAST:event_editarNacionalidadMouseClicked
+
+    boolean clickEditarTelefono = false;
+    private void editarTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarTelefonoMouseClicked
+        clickEditarTelefono = editarConfirmar(tfTelefono, editarTelefono, clickEditarTelefono, "telefono");
+    }//GEN-LAST:event_editarTelefonoMouseClicked
+
+    boolean clickEditarCorreo = false;
+    private void editarCorreoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarCorreoMouseClicked
+        clickEditarCorreo = editarConfirmar(tfCorreo, editarCorreo, clickEditarCorreo, "correo");
+    }//GEN-LAST:event_editarCorreoMouseClicked
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        abrirFichero("/Users/elianahgx/Desktop/BASURAS DE INTERNET/TutorialPython3.pdf");
+    }//GEN-LAST:event_jButton8ActionPerformed
+    
+    //metodo para editar y confirmar datos del formulario
+    private boolean editarConfirmar(JTextField tf, JLabel labelEditar, boolean clickEditar, String campoAModficar) {                                          
+        if(clickEditar == false){
+            tf.setEnabled(true);
+            labelEditar.setText("Confirmar"); 
+            labelEditar.setBackground(Color.yellow);
+            labelEditar.setForeground(Color.red);
+            clickEditar = true;
+        } else {
+            
+            if(null != campoAModficar)switch (campoAModficar) {
+                case "nombre":
+                    estudiante.setNombre(tfNombre.getText());
+                    break;
+                case "apellido":
+                    estudiante.setApellido(tfApellido.getText());
+                    break;
+                case "matricula":
+                    estudiante.setMatricula(tfMatricula.getText());
+                    break;
+                case "cedula":
+                    estudiante.setCedula(tfCedula.getText());
+                    break;
+                case "direccion":
+                    estudiante.setDireccion(tfDireccion.getText());
+                    break;
+                case "sector":
+                    estudiante.setSector(tfSector.getText());
+                    break;
+                case "provincia":
+                    estudiante.setProvincia(tfProvincia.getText());
+                    break;
+                case "nacionalidad":
+                    estudiante.setNacionalidad(tfNacionalidad.getText());
+                    break;
+                case "telefono":
+                    estudiante.setTelefono(tfTelefono.getText());
+                    break;
+                case "correo":
+                    estudiante.setCorreo(tfCorreo.getText());
+                    break;
+              
+                default:
+                    break; 
+                    
+
+                
+            }
+
+            clickEditar = false;
+            labelEditar.setText("Editar");
+            labelEditar.setBackground(null);
+            labelEditar.setForeground(Color.BLUE);
+            tf.setEnabled(false);     
+        }
+        return clickEditar;
+    }  
+    
+    public void limpiarRegistro(){
+    tFieldApellido.setText("");
+    tFieldCedula.setText("");
+    tFieldCorreo.setText("");
+    tFieldDireccion.setText("");
+    tFieldMatricula.setText("");
+    tFieldNacionalidad.setText("");
+    tFieldProvincia.setSelectedIndex(0);
+    tFieldSector.setText("");
+    tFieldTelefono.setText("");
+    tFieldnombre.setText("");
+    textFieldCedula.setText("");
+    textFieldFoto.setText("");
+    textFieldKardex.setText("");
+    textFieldNotas.setText("");
+    textFieldRecibo.setText("");
+    tfApellido.setText("");
+    tfCedula.setText("");
+    tfCorreo.setText("");
+    tfDireccion.setText("");
+    tfMatricula.setText("");
+    tfNacionalidad.setText("");
+    tfNombre.setText("");
+    tfProvincia.setText("");
+    tfSector.setText("");
+    tfTelefono.setText("");
+    comboBoxCarrera.setSelectedIndex(0);
+    comboBoxCarreraConfirm.setSelectedIndex(0);
+    comboBoxSede.setSelectedIndex(0);
+    comboBoxSedeConfirm.setSelectedIndex(0);
+    grupoRadio1.clearSelection();
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -1021,10 +1720,26 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarRecibo;
     private javax.swing.JButton btnConfirmarReg;
     private javax.swing.JButton btnSiguienteForm;
+    private javax.swing.JButton btnVerListado;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> comboBoxCarrera;
+    private javax.swing.JComboBox<String> comboBoxCarreraConfirm;
     private javax.swing.JComboBox<String> comboBoxListaCarr;
     private javax.swing.JComboBox<String> comboBoxSede;
+    private javax.swing.JComboBox<String> comboBoxSedeConfirm;
+    private javax.swing.JLabel editarApellido;
+    private javax.swing.JLabel editarCarrera;
+    private javax.swing.JLabel editarCedula;
+    private javax.swing.JLabel editarCorreo;
+    private javax.swing.JLabel editarDireccion;
+    private javax.swing.JLabel editarMatricula;
+    private javax.swing.JLabel editarNacionalidad;
+    private javax.swing.JLabel editarNombre;
+    private javax.swing.JLabel editarPasantia;
+    private javax.swing.JLabel editarProvincia;
+    private javax.swing.JLabel editarRecinto;
+    private javax.swing.JLabel editarSector;
+    private javax.swing.JLabel editarTelefono;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
@@ -1050,6 +1765,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1061,6 +1777,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1074,7 +1792,21 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel labelApellido;
+    private javax.swing.JLabel labelCarrera;
+    private javax.swing.JLabel labelCedula;
+    private javax.swing.JLabel labelCorreo;
+    private javax.swing.JLabel labelDireccion;
+    private javax.swing.JLabel labelMatricula;
+    private javax.swing.JLabel labelNacionalidad;
+    private javax.swing.JLabel labelNombre1;
+    private javax.swing.JLabel labelPasantia;
+    private javax.swing.JLabel labelProvincia;
+    private javax.swing.JLabel labelRecinto;
+    private javax.swing.JLabel labelSector;
+    private javax.swing.JLabel labelTelefono;
     private javax.swing.JPanel panelAyuda;
+    private javax.swing.JPanel panelCompletado;
     private javax.swing.JPanel panelConfirmacion;
     private javax.swing.JPanel panelConsulta;
     private javax.swing.JPanel panelInicio;
@@ -1085,23 +1817,39 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel panelProcesoForm;
     private javax.swing.JPanel panelRegistro;
     private javax.swing.JRadioButton radioBtnPasantiaNO;
+    private javax.swing.JRadioButton radioBtnPasantiaNOConfirm;
     private javax.swing.JRadioButton radioBtnPasantiaSI;
+    private javax.swing.JRadioButton radioBtnPasantiaSIConfirm;
     private javax.swing.JTextField tFieldApellido;
-    private javax.swing.JTextField tFieldCedula;
+    private javax.swing.JFormattedTextField tFieldCedula;
     private javax.swing.JTextField tFieldCorreo;
     private javax.swing.JTextField tFieldDireccion;
     private javax.swing.JTextField tFieldMatricula;
     private javax.swing.JTextField tFieldNacionalidad;
-    private javax.swing.JTextField tFieldProvincia;
+    private javax.swing.JComboBox<String> tFieldProvincia;
     private javax.swing.JTextField tFieldSector;
-    private javax.swing.JTextField tFieldTelefono;
+    private javax.swing.JFormattedTextField tFieldTelefono;
     private javax.swing.JTextField tFieldnombre;
     private javax.swing.JTextField textFieldCedula;
     private javax.swing.JTextField textFieldFoto;
     private javax.swing.JTextField textFieldKardex;
     private javax.swing.JTextField textFieldNotas;
     private javax.swing.JTextField textFieldRecibo;
+    private javax.swing.JTextField tfApellido;
+    private javax.swing.JTextField tfCedula;
+    private javax.swing.JTextField tfCorreo;
+    private javax.swing.JTextField tfDireccion;
+    private javax.swing.JTextField tfMatricula;
+    private javax.swing.JTextField tfNacionalidad;
+    private javax.swing.JTextField tfNombre;
+    private javax.swing.JTextField tfProvincia;
+    private javax.swing.JTextField tfSector;
+    private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void Reset(JComboBox<String> comboBoxCarrera) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
   
 }
